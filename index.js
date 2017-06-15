@@ -18,15 +18,15 @@ app.get('/', function(req,res){
 let token = "EAABZBqEOSvHwBAKJzFX3YD7itIQlCPrDZAZBnepIuGapJCzemGdyDJkexZBHCVRw0tOXn6uZCGb9t2BpIHXBmNmu59bTCt0HcTdVo2CWH8UmX8DR3wNdlHZABW8cpbyQhoYQlVBAnIHyVtd8gNDxiwM1ktTf3ZBtSCeGVmE82gKHAZDZD"
 
 app.get('/webhook/',function(req,res){
-	if(req.query['hub.verify_token']=="primayudantra"){
+	if(req.query['hub.verify_token']==="primayudantra"){
 		res.send(req.query['hub.challenge'])
 	}
 	res.send("wrong token")
 })
 
 app.post('/webhook/', function(req,res){
-	let messaging_events = req.body.entry[0].messaging_events;
-	for (let i=0; i < messaging_events.length; i++){
+	let messaging_events = req.body.entry[0].messaging;
+	for (let i = 0; i < messaging_events.length; i++){
 		let event = messaging_events[i];
 		let sender = event.sender.id
 		if(event.message && event.message.text){
