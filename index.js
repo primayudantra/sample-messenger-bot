@@ -15,7 +15,7 @@ app.get('/', function(req,res){
 	res.send("Hi chat bot here")
 })
 
-var token = EAABZBqEOSvHwBAKJzFX3YD7itIQlCPrDZAZBnepIuGapJCzemGdyDJkexZBHCVRw0tOXn6uZCGb9t2BpIHXBmNmu59bTCt0HcTdVo2CWH8UmX8DR3wNdlHZABW8cpbyQhoYQlVBAnIHyVtd8gNDxiwM1ktTf3ZBtSCeGVmE82gKHAZDZD
+let token = "EAABZBqEOSvHwBAKJzFX3YD7itIQlCPrDZAZBnepIuGapJCzemGdyDJkexZBHCVRw0tOXn6uZCGb9t2BpIHXBmNmu59bTCt0HcTdVo2CWH8UmX8DR3wNdlHZABW8cpbyQhoYQlVBAnIHyVtd8gNDxiwM1ktTf3ZBtSCeGVmE82gKHAZDZD"
 
 app.get('/webhook/',function(req,res){
 	if(req.query['hub.verify_token']=="primayudantra"){
@@ -41,10 +41,10 @@ function sendText(sender, text){
 	let messageData = {text: text}
 	request({
 		url: "https://graph.facebook.com/v2.6/me/messages",
-		qs: {access_token, token},
+		qs: {access_token: token},
 		method: "POST",
 		json: {
-			receipt: {id: sender},
+			recipient: {id: sender},
 			message: messageData
 		}
 	}, function(error, response,body){
