@@ -3,6 +3,7 @@
 const express = require('express')
 const bodyParser = require('body-parser')
 const request = require('request')
+const Config = require('./config')
 
 const app = express();
 
@@ -15,10 +16,10 @@ app.get('/', function(req,res){
 	res.send("Hi chat bot here")
 })
 
-let token = "EAABZBqEOSvHwBAKJzFX3YD7itIQlCPrDZAZBnepIuGapJCzemGdyDJkexZBHCVRw0tOXn6uZCGb9t2BpIHXBmNmu59bTCt0HcTdVo2CWH8UmX8DR3wNdlHZABW8cpbyQhoYQlVBAnIHyVtd8gNDxiwM1ktTf3ZBtSCeGVmE82gKHAZDZD"
+let token = Config.token;
 
 app.get('/webhook/',function(req,res){
-	if(req.query['hub.verify_token']==="primayudantra"){
+	if(req.query['hub.verify_token']==="YOUR NAME"){
 		res.send(req.query['hub.challenge'])
 	}
 	res.send("wrong token")
@@ -31,7 +32,7 @@ app.post('/webhook/', function(req,res){
 		let sender = event.sender.id
 		if(event.message && event.message.text){
 			let text = event.message.text
-			sendText(sender, "Text echo: " + text.substring(0,100))
+			sendText(sender, "Your text is: " + text.substring(0,100))
 		}
 	}
 	res.sendStatus(200)
